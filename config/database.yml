@@ -84,4 +84,5 @@ test:
 production:
   <<: *default
   database: sadhanamrita_production
-  password: <%= ENV['SADHANAMRITA_DATABASE_PASSWORD'] %>
+  #password: <%= ENV['SADHANAMRITA_DATABASE_PASSWORD'] %>
+  password: j3qq4h7h2v
