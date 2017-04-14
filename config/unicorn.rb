@@ -1,16 +1,18 @@
 root = "/home/developer/projects/sadhanamrita/current"
 working_directory root
 
-pid "#{root}/tmp/pids/unicorn.pid"
+pid "#{root}/shared/pids/unicorn.pid"
 
-stderr_path "#{root}/log/unicorn.log"
+stderr_path "#{root}/log/unicorn_error.log"
 stdout_path "#{root}/log/unicorn.log"
 
-worker_processes Integer(ENV['WEB_CONCURRENCY'])
+worker_processes 10 # Integer(ENV['WEB_CONCURRENCY'])
 timeout 30
 preload_app true
 
-listen '/tmp/unicorn.spui.sock', backlog: 64
+listen '#{root}/shared/unicorn.sock', backlog: 64
+
+GC.copy_on_write_friendly = true if GC.respond_to?(:copy_on_write_friendly=) # Решительно не уверен, что значит эта строка, но я решил ее оставить.
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do

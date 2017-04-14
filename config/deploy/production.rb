@@ -59,26 +59,3 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-
-set :port, 22
-set :user, 'developer'
-set :branch, 'master'
-set :deploy_via, :remote_cache
-set :use_sudo, false
-
-server '185.117.152.101',
-  roles: [:web, :app, :db],
-  port: fetch(:port),
-  user: fetch(:user),
-  primary: true
-
-set :deploy_to, "/home/#{fetch(:user)}/projects/sadhanamrita"
-
-set :ssh_options, {
-  forward_agent: true,
-  auth_methods: %w(publickey),
-  user: 'developer',
-}
-
-set :rails_env, :production
-set :conditionally_migrate, true
