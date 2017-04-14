@@ -1,1 +1,33 @@
-<p>Sadhanamrita</p>
+%h1 Test
+%div
+	- @years.each do |y|
+		%button{ class: "button button1 year-button #{(y == Date.current.year) ? 'active' : ''}" }
+			= y
+%div
+	- @months.each do |m|
+		%button{ class: "button button1 month-button #{(m[:number] == Date.current.month) ? 'active' : ''}" }
+			= m[:name]
+.table
+	%table.sadhana-table
+		%tr
+			%th.header
+				Days
+			%th.header
+				Count
+			%th.header
+				Wake Up
+			%th.header
+				Books
+		- for i in 1..days_in_month(Date.current.year,Date.current.month) do
+			- day_values = DateSadhana.where( date: Date.current ).first
+			%tr
+				%th
+					= i
+				%td
+					%input.cell{ type: "number", min: "0", max: "256" }
+						= day_values.nil? ? "" : day_values[:count]
+				%td
+					2
+				%td
+					3
+

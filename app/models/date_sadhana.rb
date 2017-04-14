@@ -1,0 +1,2 @@
+class DateSadhana < ApplicationRecord
+end
