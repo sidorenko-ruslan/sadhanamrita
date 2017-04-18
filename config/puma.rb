@@ -6,6 +6,10 @@
 #
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i
 threads threads_count, threads_count
+workers 2
+
+app_dir = File.expand_path("../..", __FILE__)
+shared_dir = "#{app_dir}/shared"
 
 # Specifies the `port` that Puma will listen on to receive requests, default is 3000.
 #
@@ -13,7 +17,15 @@ port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
-environment ENV.fetch("RAILS_ENV") { "development" }
+environment ENV.fetch("RAILS_ENV") { "production" }
+
+bind "unix://#/home/developer/projects/sadhanamrita/shared/tmp/sockets/sadhanamrita-puma.sock"
+
+stdout_redirect "/home/developer/projects/sadhanamrita/shared/log/puma.stdout.log", "/home/developer/projects/sadhanamrita/shared/log/puma.stderr.log", true
+
+pidfile "/home/developer/projects/sadhanamrita/shared/tmp/pids/puma.pid"
+state_path "/home/developer/projects/sadhanamrita/shared/tmp/pids/puma.state"
+activate_control_app
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
