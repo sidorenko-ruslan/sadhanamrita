@@ -42,9 +42,9 @@ gem 'haml'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'capistrano',         require: false
+  gem 'capistrano', github: 'capistrano/capistrano', ref: 'master',         require: false
   gem 'capistrano-rvm',     require: false
-  gem 'capistrano-rails',   require: false
+  gem 'capistrano-rails', github: 'capistrano/rails', ref: 'master',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
 end
