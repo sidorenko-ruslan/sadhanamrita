@@ -1,5 +1,10 @@
 class HomeController < ApplicationController
+	before_action :authenticate_user!
 	def index
+		@current_year = params[:y].nil? ? Date.current.year : params[:y]
+		@current_month = params[:m].nil? ? Date.current.month : params[:m]
+		p @current_year
+		p @current_month
 		@years = (2015..2018)
 		@months = [ { number: 1, name: "Январь" }, { number: 2, name: "Февраль" }, { number: 3, name: "Март" }, { number: 4, name: "Апрель" }, 
 					{ number: 5, name: "Май" }, { number: 6, name: "Июнь" }, { number: 7, name: "Июль" }, { number: 8, name: "Август" }, 

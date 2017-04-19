@@ -1,33 +1,36 @@
 %h1 Test
 %div
 	- @years.each do |y|
-		%button{ class: "button button1 year-button #{(y == Date.current.year) ? 'active' : ''}" }
+		= (y == @current_year)
+		%a{ onclick: "changeDate();", class: "btn button button1 year-button #{(y == @current_year) ? 'active' : ''}" , "year-number": "#{y}" }
 			= y
 %div
 	- @months.each do |m|
-		%button{ class: "button button1 month-button #{(m[:number] == Date.current.month) ? 'active' : ''}" }
+		= m[:number] == @current_month
+		%a{ onclick: "changeDate();", class: "btn button button1 month-button #{(m[:number] == @current_month) ? 'active' : ''}", "month-number": "#{m[:number]}" }
 			= m[:name]
-.table
-	%table.sadhana-table
-		%tr
-			%th.header
-				Days
-			%th.header
-				Count
-			%th.header
-				Wake Up
-			%th.header
-				Books
-		- for i in 1..days_in_month(Date.current.year,Date.current.month) do
-			- day_values = DateSadhana.where( date: Date.current ).first
+%br
+.container-fluid
+	%table.table.table-bordered.table-responsive#sadhana-table
+		%thead
 			%tr
 				%th
-					= i
-				%td
-					%input.cell{ type: "number", min: "0", max: "256" }
-						= day_values.nil? ? "" : day_values[:count]
-				%td
-					2
-				%td
-					3
+					Day
+				%th
+					Count
+				%th
+					Up Time
+				%th
+					Down Time
+		%tbody
+			- for i in 1..days_in_month(@current_year.to_i,@current_month.to_i) do
+				%tr
+					%th.cell{ scope: "row" }
+						= i
+					%td
+						%input.form-control.cell.number{ id: "round-count-day-#{i}", type: "number", min: "0", max: "256" }
+					%td
+						%input.form-control.cell.time{ id: "uptime-day-#{i}" }
+					%td
+						%input.form-control.cell.time{ id: "downtime-day-#{i}" }
 

@@ -19,5 +19,22 @@ $( document ).on('turbolinks:load', function() {
 			}
 		});
 	});
+
+	$('.time').mask('00:00');
+	$('.number').mask('000');
+	$('table').colResizable({resizeMode:'overflow', postbackSafe:true});
 	
 });
+
+
+function changeDate() {
+	console.log("Date changed");
+	var currentYear = $(".year-button.active").attr("year-number");
+	var currentMonth = $(".month-button.active").attr("month-number");
+	if (currentYear != null && currentMonth != null) {
+		window.location = "/?m=" + currentMonth + "&y=" + currentYear;
+	}
+	else {
+		window.location = "/";
+	}
+}
