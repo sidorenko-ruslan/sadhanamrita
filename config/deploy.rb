@@ -1,8 +1,11 @@
-set :application, 'sadhanamrita'
-set :repo_url, 'git@github.com:sidorenko-ruslan/sadhanamrita.git'
+# Change these
+server '185.117.152.101', port: 22, roles: [:web, :app, :db], primary: true
+
+set :repo_url,        'git@github.com:sidorenko-ruslan/sadhanamrita.git'
+set :application,     'sadhanamrita'
 set :user,            'developer'
 set :puma_threads,    [4, 16]
-set :puma_workers,    1
+set :puma_workers,    0
 
 # Don't change these unless you know what you're doing
 set :pty,             true
@@ -21,15 +24,15 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 
 ## Defaults:
-set :scm,           :git
-set :branch,        :master
-set :format,        :pretty
-set :log_level,     :debug
-set :keep_releases, 5
+# set :scm,           :git
+# set :branch,        :master
+# set :format,        :pretty
+# set :log_level,     :debug
+# set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-set :linked_files, %w{config/database.yml}
-set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+# set :linked_files, %w{config/database.yml}
+# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -75,3 +78,7 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
+
+# ps aux | grep puma    # Get puma pid
+# kill -s SIGUSR2 pid   # Restart puma
+# kill -s SIGTERM pid   # Stop puma
