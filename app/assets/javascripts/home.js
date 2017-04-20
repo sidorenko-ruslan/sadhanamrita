@@ -1,5 +1,5 @@
 $( document ).on('turbolinks:load', function() {
-	$('.button').click(function () {
+	$('.datebutton').click(function () {
 		var clickedButton = $(this);
 		var buttonClass = "";
 		if (clickedButton.hasClass("year-button")) {

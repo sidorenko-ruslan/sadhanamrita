@@ -1,11 +1,11 @@
 %h1 Test
 %div
 	- @years.each do |y|
-		%a{ onclick: "changeDate();", class: "btn button button1 year-button #{(y == @current_year) ? 'active' : ''}" , "year-number": "#{y}", remote: true }
+		%a{ onclick: "changeDate();", class: "btn button datebutton button1 year-button #{(y == @current_year) ? 'active' : ''}" , "year-number": "#{y}", remote: true }
 			= y
 %div
 	- @months.each do |m|
-		%a{ onclick: "changeDate();", class: "btn button button1 month-button #{(m[:number] == @current_month) ? 'active' : ''}", "month-number": "#{m[:number]}", remote: true }
+		%a{ onclick: "changeDate();", class: "btn button datebutton button1 month-button #{(m[:number] == @current_month) ? 'active' : ''}", "month-number": "#{m[:number]}", remote: true }
 			= m[:name]
 %br
 .container-fluid
@@ -13,26 +13,20 @@
 		%thead
 			%tr
 				%th
-					Day
-				%th
-					Count
-				%th
-					Wake up Time
-				%th
-					Down Time
-				%th
-					Books reading
-				%th
-					Lectures Listening
+					День
+				- current_user.table_columns.each do |column|
+					%th
+						= column.title
 		%tbody
 			- for i in 1..days_in_month(@current_year.to_i,@current_month.to_i) do
 				%tr
 					%th.cell{ scope: "row" }
 						= i
-					%td
-						%input.form-control.cell.number{ id: "round-count-day-#{i}", type: "number", min: "0", max: "256" }
-					%td
-						%input.form-control.cell.time{ id: "uptime-day-#{i}" }
-					%td
-						%input.form-control.cell.time{ id: "downtime-day-#{i}" }
-
+					- current_user.table_columns.each do |column|
+						%td
+							- if column.column_type == 1
+								%input.form-control.cell.number{ id: "round-count-day-#{i}", type: "number", min: "0", max: "256" }
+							- elsif column.column_type == 2
+								%input.form-control.cell.time{ id: "uptime-day-#{i}" }
+							- elsif column.column_type == 3
+								%input.form-control.cell{ id: "uptime-day-#{i}" }

@@ -10,7 +10,7 @@ input[type="number"] {
     -moz-appearance: textfield;
 }
 
-h1 {
+h1 h2 {
     text-align: center;
 }
 
@@ -26,10 +26,6 @@ th {
 .cell {
     text-align: center;
     vertical-align: center;
-}
-
-#sadhana-table tr td:nth-child(1) {
-    width: 3%;
 }
 
 .button {

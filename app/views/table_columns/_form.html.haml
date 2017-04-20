@@ -1,0 +1,13 @@
+= form_for @table_column do |f|
+	.form-group
+		= f.label :title, "Название"
+		%br
+		= f.text_field :title, class: "form-control"
+	.form-group
+		= f.label :column_type, "Тип колонки"
+		%br
+		= f.select :column_type, @column_types.map { |c| [ c[:name], c[:val] ] }, class: "form-control"
+	.form-group
+		= f.label :order, "Порядок" 
+		= f.number_field :order, class: "form-control"
+	= f.submit "Сохранить"

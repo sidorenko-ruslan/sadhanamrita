@@ -1,0 +1,25 @@
+.container-fluid
+	%table.table
+		%thead
+			%tr
+				%th
+					Порядок
+				%th
+					Название
+				%th
+					Тип
+				%th
+					Изменить
+		%tbody
+			- @table_columns.each_with_index do |c,i|
+				%tr
+					%td
+						= c.order + 1
+					%td
+						= c.title
+					%td
+						= c.column_type
+					%td
+						- if i > 2
+							= link_to "Редактировать", edit_table_column_path(c)
+	= link_to "Добавить", new_table_column_path, class: "btn button"
