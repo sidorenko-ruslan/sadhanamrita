@@ -1,12 +1,10 @@
 %h1 Test
 %div
 	- @years.each do |y|
-		= (y == @current_year)
 		%a{ onclick: "changeDate();", class: "btn button button1 year-button #{(y == @current_year) ? 'active' : ''}" , "year-number": "#{y}" }
 			= y
 %div
 	- @months.each do |m|
-		= m[:number] == @current_month
 		%a{ onclick: "changeDate();", class: "btn button button1 month-button #{(m[:number] == @current_month) ? 'active' : ''}", "month-number": "#{m[:number]}" }
 			= m[:name]
 %br
