@@ -10,17 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419101503) do
+ActiveRecord::Schema.define(version: 20170420072000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "date_sadhanas", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.date     "date",       null: false
-    t.string   "values"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "table_columns", force: :cascade do |t|
+    t.string   "title",                  null: false
+    t.integer  "type",                   null: false
+    t.integer  "order",      default: 1, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "user_table_column_values", force: :cascade do |t|
+    t.integer "user_id",                      null: false
+    t.integer "table_column_id",              null: false
+    t.integer "year",                         null: false
+    t.integer "month",                        null: false
+    t.json    "days_values",     default: {}, null: false
+  end
+
+  create_table "user_table_columns", force: :cascade do |t|
+    t.integer "user_id",                         null: false
+    t.integer "table_column_id",                 null: false
+    t.boolean "is_active",       default: true,  null: false
+    t.boolean "is_primary",      default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,4 +56,8 @@ ActiveRecord::Schema.define(version: 20170419101503) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "user_table_column_values", "table_columns"
+  add_foreign_key "user_table_column_values", "users"
+  add_foreign_key "user_table_columns", "table_columns"
+  add_foreign_key "user_table_columns", "users"
 end

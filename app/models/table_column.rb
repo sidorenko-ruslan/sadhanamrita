@@ -1,0 +1,2 @@
+class TableColumn < ApplicationRecord
+end

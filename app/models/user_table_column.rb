@@ -1,0 +1,2 @@
+class UserTableColumn < ApplicationRecord
+end

@@ -1,11 +1,11 @@
 %h1 Test
 %div
 	- @years.each do |y|
-		%a{ onclick: "changeDate();", class: "btn button button1 year-button #{(y == @current_year) ? 'active' : ''}" , "year-number": "#{y}" }
+		%a{ onclick: "changeDate();", class: "btn button button1 year-button #{(y == @current_year) ? 'active' : ''}" , "year-number": "#{y}", remote: true }
 			= y
 %div
 	- @months.each do |m|
-		%a{ onclick: "changeDate();", class: "btn button button1 month-button #{(m[:number] == @current_month) ? 'active' : ''}", "month-number": "#{m[:number]}" }
+		%a{ onclick: "changeDate();", class: "btn button button1 month-button #{(m[:number] == @current_month) ? 'active' : ''}", "month-number": "#{m[:number]}", remote: true }
 			= m[:name]
 %br
 .container-fluid
@@ -17,9 +17,13 @@
 				%th
 					Count
 				%th
-					Up Time
+					Wake up Time
 				%th
 					Down Time
+				%th
+					Books reading
+				%th
+					Lectures Listening
 		%tbody
 			- for i in 1..days_in_month(@current_year.to_i,@current_month.to_i) do
 				%tr

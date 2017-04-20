@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+%html
+  %head
+    %meta{ charset: "UTF-8" }
+    %title
+      Sadhanamrita
+    = csrf_meta_tags
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+    %header
+      = render 'shared/header_menu'
+
+    %p.notice
+      = notice
+    %p.alert
+      = alert
+
+    = yield
+
+    = yield :footer_js

@@ -1,0 +1,19 @@
+%nav.navbar.navbar-inverse.navbar-fixed-top
+	.container-fluid
+		.navbar-header
+			%a.navbar-brand{ href: "#{root_path}" }
+				Sadhanamrita
+		- if user_signed_in?
+			%ul.nav.navbar-nav
+				%li.active
+					%a{ href: "#" }
+				%li
+					%a{ href: "#" }
+						Table Columns
+		%ul.nav.navbar-nav.navbar-right
+			- if user_signed_in?
+				%li
+					= link_to "#{destroy_user_session_path}", method: :delete do
+						%span.glyphicon.glyphicon-log-out
+							Logout
+					
